@@ -7,12 +7,14 @@ import scala.tools.reflect.ToolBox
 import com.google.common.io.Files
 import java.nio.charset.Charset
 import java.io.File
+import scala.reflect.internal.util.BatchSourceFile
+
 
 object CompilerTree extends Global(new Settings()) {
   new Run
   def parseToTree(path:String) = {
     val code  = AbstractFile.getFile(path)
-    val bfs = new util.BatchSourceFile(code,code.toCharArray)
+    val bfs = new BatchSourceFile(code,code.toCharArray)
     val parser = new syntaxAnalyzer.UnitParser(new CompilationUnit(bfs))
     parser.smartParse()
   }
