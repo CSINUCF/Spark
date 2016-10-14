@@ -11,6 +11,11 @@ import java.io.File
 
 object TreePrinter extends App {
   val sourcePath = "data/TrivialObject.scala"
-  val rawAst = CompilerTree.parseToTree(sourcePath)
+  val rawAst = CompilerTree.parseWithMirrorTypeCheck(sourcePath)
+  TranverseTree.traverse(rawAst)
+  val res = TranverseTree.applies
+  
   println(DefaultBeautifier.format(showRaw(rawAst)))
+  
+  res.foreach { x => println(x.toString()) }
 }

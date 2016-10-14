@@ -2,7 +2,7 @@ package org.ucf.spark.ScalaAST
 import scala.tools.nsc._
 import io._
 import scala.io.Source
-import scala.reflect.runtime.universe._
+import scala.reflect.runtime.{universe =>ru}
 import scala.tools.reflect.ToolBox
 import com.google.common.io.Files
 import java.nio.charset.Charset
@@ -10,7 +10,7 @@ import java.io.File
 import scala.reflect.internal.util.BatchSourceFile
 
 
-object CompilerTree extends Global(new Settings()) {
+object CompilerTree extends Global(new Settings()){
   new Run
   def parseToTree(path:String) = {
     val code  = AbstractFile.getFile(path)
@@ -23,13 +23,16 @@ object CompilerTree extends Global(new Settings()) {
   }
   def parseWithMirror(path:String) = {
     val source = Files.toString(new File(path),Charset.forName("UTF-8"))
-    val toolBox = runtimeMirror(getClass.getClassLoader).mkToolBox()
+    val toolBox = ru.runtimeMirror(getClass.getClassLoader).mkToolBox()
     toolBox.parse(source)
   }
   
   def parseWithMirrorTypeCheck(path:String) = {
     val source = Files.toString(new File(path),Charset.forName("UTF-8"))
-    val toolBox = runtimeMirror(getClass.getClassLoader).mkToolBox()
+    val toolBox = ru.runtimeMirror(getClass.getClassLoader).mkToolBox()
     toolBox.typecheck(toolBox.parse(source))
   }
+  
+  
+  
 }
