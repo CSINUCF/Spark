@@ -1,0 +1,24 @@
+package ucf.spark.semantics
+
+/**
+  * @author 
+  */
+
+class tem(input:String) {
+  private var _input:String = input
+  def getInput = this._input
+  def setInput(newValue:String):String = {
+    val oldValue = this.getInput
+    this._input = newValue
+    oldValue
+  }
+}
+
+object ScalaApp {
+  def printHello() =  println("Hello World from Scala")
+  def main(args: Array[String]): Unit = {
+    val temp = new tem("Bing")
+    println("Old:"+ temp.setInput() + "New: "+temp.getInput)
+    printHello()
+  }
+}

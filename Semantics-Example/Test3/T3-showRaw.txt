@@ -1,0 +1,220 @@
+PackageDef(
+  Select(Select(Ident(org), ucf), spark),
+  List(
+    Import(
+      Select(Select(Ident(org), apache), spark), List(ImportSelector(SparkContext, 49, SparkContext, 49))
+    ),
+    Import(
+      Select(Select(Ident(org), apache), spark), List(ImportSelector(SparkConf, 87, SparkConf, 87))
+    ),
+    ModuleDef(
+      Modifiers(0, , List()),
+      SparkTest,
+      Template(
+        List(Select(Ident(scala), AnyRef)),
+        ValDef(Modifiers(4, , List()), spark, TypeTree(), EmptyTree()),
+        List(
+          DefDef(
+            Modifiers(0, , List()),
+            <init>,
+            List(),
+            List(List()),
+            TypeTree(),
+            Block(
+              List(
+                Apply(
+                  Select(Super(This(), ), <init>), List()
+                )
+              ),
+              Literal(Constant(()))
+            )
+          ),
+
+          DefDef(
+            Modifiers(0, , List()),
+            main,
+            List(),
+            List(
+              List(
+                ValDef(Modifiers(8192, , List()), args, TypeTree(), EmptyTree())
+              )),
+            TypeTree(),
+            Block(
+              List(
+                ValDef(
+                  Modifiers(0, , List()),
+                  conf,
+                  TypeTree(),
+                  Apply(
+                    Select(
+                      Apply(
+                        Select(
+                          New(
+                            Select(
+                              Select(Select(Ident(org), apache), spark),
+                              SparkConf)),
+                          <init>),
+                        List()),
+                      setAppName),
+                    List(Literal(Constant(SparkTestCase))))),
+
+                ValDef(
+                  Modifiers(0, , List()),
+                  sc,
+                  TypeTree(),
+                  Apply(
+                    Select(
+                      New(
+                        Select(
+                          Select(Select(Ident(org), apache), spark),
+                          SparkContext)),
+                      <init>),
+                    List(Ident(conf)))),
+
+                ValDef(
+                  Modifiers(0, , List()),
+                  distFile,
+                  TypeTree(),
+                  Apply(
+                    Select(Ident(sc), textFile),
+                    List(Literal(Constant(data.txt)),
+                         Select(Ident(sc), textFile$default$2)))),
+
+                ValDef(
+                  Modifiers(0, , List()),
+                  data,
+                  TypeTree(),
+                  Apply(
+                    Select(Select(Ident(scala), Array), apply),
+                    List(Literal(Constant(1)),
+                         Literal(Constant(2)),
+                         Literal(Constant(3)),
+                         Literal(Constant(4)),
+                         Literal(Constant(5))))),
+
+                ValDef(
+                  Modifiers(0, , List()),
+                  distData,
+                  TypeTree(),
+                  Apply(
+                    Apply(
+                      TypeApply(Select(Ident(sc), parallelize), List(TypeTree())),
+                      List(
+                        Apply(
+                          Select(Select(This(scala), Predef), wrapIntArray), List(Ident(data))),
+                        TypeApply(Select(Ident(sc), parallelize$default$2), List(TypeTree())))),
+                    List(
+                      Typed(Select(Ident(ClassTag), Int), TypeTree())))),
+
+                Apply(
+                  Apply(
+                    TypeApply(Select(Ident(distData), map), List(TypeTree())),
+                    List(
+                      Function(
+                        List(
+                          ValDef(Modifiers(2105344, , List()), x$1, TypeTree(), EmptyTree())
+                        ), Apply(
+                          Select(Ident(x$1), $plus), List(Literal(Constant(2)))
+                        )
+                      ))),
+                  List(
+                    Typed(Select(Ident(ClassTag), Int), TypeTree()))),
+
+                ValDef(
+                  Modifiers(0, , List()),
+                  add2,
+                  TypeTree(),
+                  Apply(
+                    Apply(
+                      TypeApply(
+                        Select(
+                          Apply(
+                            Apply(
+                              TypeApply(
+                                Select(
+                                  Apply(
+                                    Apply(
+                                      TypeApply(Select(Ident(distData), map), List(TypeTree())),
+                                      List(
+                                        Function(
+                                          List(
+                                            ValDef(Modifiers(2105344, , List()), x0$1, TypeTree(), EmptyTree())),
+                                          Match(
+                                            Ident(x0$1),
+                                            List(
+                                              CaseDef(
+                                                Bind(e, Ident(_)),
+                                                EmptyTree(),
+                                                Apply(
+                                                  Select(Ident(e), $plus),
+                                                  List(Literal(Constant(2)))))))))),
+                                    List(
+                                      Typed(Select(Ident(ClassTag), Int), TypeTree()))),
+                                  map),
+                                List(TypeTree())),
+                              List(
+                                Function(
+                                  List(
+                                    ValDef(Modifiers(2105344, , List()), x0$2, TypeTree(), EmptyTree())),
+                                  Match(
+                                    Ident(x0$2),
+                                    List(
+                                      CaseDef(
+                                        Bind(f, Ident(_)),
+                                        EmptyTree(),
+                                        Apply(
+                                          Select(Ident(f), $times),
+                                          List(Literal(Constant(2)))))))))),
+                            List(
+                              Typed(Select(Ident(ClassTag), Int), TypeTree()))),
+                          map),
+                        List(TypeTree())),
+                      List(
+                        Function(
+                          List(
+                            ValDef(Modifiers(2105344, , List()), x$2, TypeTree(), EmptyTree())),
+                          Apply(
+                            Select(Ident(x$2), $plus), List(Literal(Constant(5))))))),
+                    List(
+                      Typed(Select(Ident(ClassTag), Int), TypeTree())))),
+
+                ValDef(
+                  Modifiers(0, , List()),
+                  add3,
+                  TypeTree(),
+                  Apply(
+                    Apply(
+                      TypeApply(Select(Ident(add2), map), List(TypeTree())),
+                      List(
+                        Function(
+                          List(
+                            ValDef(Modifiers(2105344, , List()), x0$3, TypeTree(), EmptyTree())),
+                          Match(
+                            Ident(x0$3),
+                            List(
+                              CaseDef(
+                                Bind(e, Ident(_)),
+                                EmptyTree(),
+                                Apply(
+                                  Select(Ident(e), $times),
+                                  List(Literal(Constant(3)))))))))),
+                    List(
+                      Typed(Select(Ident(ClassTag), Int), TypeTree())))),
+
+                ValDef(
+                  Modifiers(0, , List()), reg, TypeTree(),
+                  Apply(
+                    Select(Ident(add2), reduce),
+                    List(
+                      Function(
+                        List(
+                          ValDef(Modifiers(2105344, , List()), x$3, TypeTree(), EmptyTree()),
+                          ValDef(Modifiers(2105344, , List()), x$4, TypeTree(), EmptyTree())),
+                        Apply(Select(Ident(x$3), $plus), List(Ident(x$4)))))))),
+              Apply(Select(Ident(sc), stop), List()))
+          )
+        )
+      )
+    )
+  )
+)
