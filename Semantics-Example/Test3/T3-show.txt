@@ -1,0 +1,39 @@
+package org.ucf.spark {
+  import org.apache.spark.SparkContext;
+  import org.apache.spark.SparkConf;
+  object SparkTest extends scala.AnyRef { spark: org.ucf.spark.SparkTest.type =>
+    def <init>(): org.ucf.spark.SparkTest.type = {
+      SparkTest.super.<init>();
+      ()
+    };
+    def main(args: Array[String]): Unit = {
+    val conf: org.apache.spark.SparkConf = new org.apache.spark.SparkConf().setAppName("SparkTestCase");
+
+	  val sc: org.apache.spark.SparkContext = new org.apache.spark.SparkContext(conf);
+
+	  val distFile: org.apache.spark.rdd.RDD[String] = sc.textFile("data.txt", sc.textFile$default$2);
+
+	  val data: Array[Int] = scala.Array.apply(1, 2, 3, 4, 5);
+
+	  val distData: org.apache.spark.rdd.RDD[Int] = sc.parallelize[Int](scala.this.Predef.wrapIntArray(data), sc.parallelize$default$2[Nothing])((ClassTag.Int: scala.reflect.ClassTag[Int]));
+
+	  distData.map[Int](((x$1: Int) => x$1.+(2)))((ClassTag.Int: scala.reflect.ClassTag[Int]));
+
+	  val add2: org.apache.spark.rdd.RDD[Int] = distData.map[Int]((
+		(x0$1: Int) => x0$1 match { case (e @ _) => e.+(2) })
+	  )((ClassTag.Int: scala.reflect.ClassTag[Int])).map[Int]((
+		(x0$2: Int) => x0$2 match { case (f @ _) => f.*(2) })
+	  )((ClassTag.Int: scala.reflect.ClassTag[Int])).map[Int]((
+	    (x$2: Int) => x$2.+(5))
+	  )((ClassTag.Int: scala.reflect.ClassTag[Int]));
+
+	  val add3: org.apache.spark.rdd.RDD[Int] = add2.map[Int]((
+		(x0$3: Int) => x0$3 match { case (e @ _) => e.*(3) })
+	  )((ClassTag.Int: scala.reflect.ClassTag[Int]));
+
+	  val reg: Int = add2.reduce(((x$3: Int, x$4: Int) => x$3.+(x$4)));
+
+	  sc.stop()
+    }
+  }
+}

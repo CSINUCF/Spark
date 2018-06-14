@@ -1,0 +1,194 @@
+
+<sc: error>.<stop: error>()
+Apply(Select(Ident(sc), stop), List())
+***********************************************
+
+<add2: error>.<reduce: error>(((x$3, x$4) => x$3.$plus(x$4)))
+Apply(
+  Select(Ident(add2), reduce), List(
+    Function(
+      List(
+        ValDef(Modifiers(2105344, , List()), x$3, TypeTree(), EmptyTree()), ValDef(Modifiers(2105344, , List()), x$4, TypeTree(), EmptyTree())
+      ), Apply(Select(Ident(x$3), $plus), List(Ident(x$4)))
+    )
+  )
+)
+***********************************************
+
+<add2: error>.<map: error>(<empty> match {
+  case (e @ _) => e.$times(3)
+})
+Apply(
+  Select(Ident(add2), map), List(
+    Match(
+      EmptyTree(), List(
+        CaseDef(
+          Bind(e, Ident(_)), EmptyTree(), Apply(
+            Select(Ident(e), $times), List(Literal(Constant(3)))
+          )
+        )
+      )
+    )
+  )
+)
+***********************************************
+
+<distData: error>.<map: error>(<empty> match {
+  case (e @ _) => e.$plus(2)
+})
+Apply(
+  Select(Ident(distData), map), List(
+    Match(
+      EmptyTree(), List(
+        CaseDef(
+          Bind(e, Ident(_)), EmptyTree(), Apply(
+            Select(Ident(e), $plus), List(Literal(Constant(2)))
+          )
+        )
+      )
+    )
+  )
+)
+***********************************************
+
+<distData: error>.<map: error>(<empty> match {
+  case (e @ _) => e.$plus(2)
+}).<map: error>(<empty> match {
+  case (f @ _) => f.$times(2)
+})
+Apply(
+  Select(
+    Apply(
+      Select(Ident(distData), map), List(
+        Match(
+          EmptyTree(), List(
+            CaseDef(
+              Bind(e, Ident(_)), EmptyTree(), Apply(
+                Select(Ident(e), $plus), List(Literal(Constant(2)))
+              )
+            )
+          )
+        )
+      )
+    ), map
+  ), List(
+    Match(
+      EmptyTree(), List(
+        CaseDef(
+          Bind(f, Ident(_)), EmptyTree(), Apply(
+            Select(Ident(f), $times), List(Literal(Constant(2)))
+          )
+        )
+      )
+    )
+  )
+)
+***********************************************
+
+<distData: error>.<map: error>(<empty> match {
+  case (e @ _) => e.$plus(2)
+}).<map: error>(<empty> match {
+  case (f @ _) => f.$times(2)
+}).<map: error>(((x$2) => x$2.$plus(5)))
+Apply(
+  Select(
+    Apply(
+      Select(
+        Apply(
+          Select(Ident(distData), map), List(
+            Match(
+              EmptyTree(), List(
+                CaseDef(
+                  Bind(e, Ident(_)), EmptyTree(), Apply(
+                    Select(Ident(e), $plus), List(Literal(Constant(2)))
+                  )
+                )
+              )
+            )
+          )
+        ), map
+      ), List(
+        Match(
+          EmptyTree(), List(
+            CaseDef(
+              Bind(f, Ident(_)), EmptyTree(), Apply(
+                Select(Ident(f), $times), List(Literal(Constant(2)))
+              )
+            )
+          )
+        )
+      )
+    ), map
+  ), List(
+    Function(
+      List(
+        ValDef(Modifiers(2105344, , List()), x$2, TypeTree(), EmptyTree())
+      ), Apply(
+        Select(Ident(x$2), $plus), List(Literal(Constant(5)))
+      )
+    )
+  )
+)
+***********************************************
+
+<distData: error>.<map: error>(((x$1) => x$1.$plus(2)))
+Apply(
+  Select(Ident(distData), map), List(
+    Function(
+      List(
+        ValDef(Modifiers(2105344, , List()), x$1, TypeTree(), EmptyTree())
+      ), Apply(
+        Select(Ident(x$1), $plus), List(Literal(Constant(2)))
+      )
+    )
+  )
+)
+***********************************************
+
+<sc: error>.<parallelize: error>(data)
+Apply(Select(Ident(sc), parallelize), List(Ident(data)))
+***********************************************
+
+scala.Array.apply(1, 2, 3, 4, 5)
+Apply(
+  Select(Select(Ident(scala), Array), apply), List(Literal(Constant(1)), Literal(Constant(2)), Literal(Constant(3)), Literal(Constant(4)), Literal(Constant(5)))
+)
+***********************************************
+
+<sc: error>.<textFile: error>("data.txt")
+Apply(
+  Select(Ident(sc), textFile), List(Literal(Constant(data.txt)))
+)
+***********************************************
+
+new <SparkContext: error>(<conf: error>)
+Apply(
+  Select(New(Ident(SparkContext)), <init>), List(Ident(conf))
+)
+***********************************************
+
+new <SparkConf: error>()
+Apply(
+  Select(New(Ident(SparkConf)), <init>), List()
+)
+***********************************************
+
+new <SparkConf: error>().<setAppName: error>("SparkTestCase")
+Apply(
+  Select(
+    Apply(
+      Select(New(Ident(SparkConf)), <init>), List()
+    ), setAppName
+  ), List(Literal(Constant(SparkTestCase)))
+)
+***********************************************
+
+SparkTest.super.<init>()
+Apply(
+  Select(Super(This(), ), <init>), List()
+)
+***********************************************
+
+***********************************************
+
+***********************************************
