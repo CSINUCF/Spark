@@ -15,3 +15,7 @@ object SparkMain_OM_O extends OperationMigrationOptimzied
 
 object SparkMain_UD extends UnusedData
 object SparkMain_UD_O extends UnusedDataOptimized
+
+object SparkMain_Combine extends Combine
+object SparkMain_Combine_U extends CombineUnused
+object SparkMain_Combine_F extends CombineFilter
