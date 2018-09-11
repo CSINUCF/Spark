@@ -1,0 +1,23 @@
+package org.ucf.spark
+
+import org.apache.spark._
+import org.apache.spark.SparkContext
+import org.apache.spark.{SparkContext,SparkConf => conf}
+
+PackageDef(
+  Select(Select(Ident(org), ucf), spark), List(
+    Import(
+      Select(Select(Ident(org), apache), spark),
+      List(ImportSelector(_, 49, null, -1))
+    ),
+    Import(
+      Select(Select(Ident(org), apache), spark),
+      List(ImportSelector(SparkContext, 76, SparkContext, 76))
+    ),
+    Import(
+      Select(Select(Ident(org), apache), spark),
+      List(ImportSelector(SparkContext, 115, SparkContext, 115),
+           ImportSelector(SparkConf, 128, conf, 141))
+    )
+  )
+)

@@ -1,28 +1,22 @@
 package org.ucf.spark
+
 import org.apache.spark.SparkContext
 import org.apache.spark.SparkConf
 
 object SparkTest {
   spark =>
+
   def main(args: Array[String]): Unit = {
     val conf = new SparkConf().setAppName("SparkTestCase")
     val sc = new SparkContext(conf)
-
-    val distFile = sc.textFile("data.txt")
-
-    val data = Array(1, 2, 3, 4, 5)
-    val distData = sc.parallelize(data)
-    distData.map(_ + 2)
-    val add2 = distData.map({
-      case e => e + 2
-    }).map({
-      case f => f*2
-    }).map(_ + 5)
-    val add3 = add2 map {
-      case e => e*3
-    }
-    val reg = add2.reduce(_+_)
-
+    val text = sc.textFile("data.txt")
+    val groups = text.flatMap(line => line.split(" "))
+      .map(word => (word,1))
+      .reduceByKey(_ + _)
+    val abc = groups.filter({ case (word,number) => word.contains("abc") })
+    val counts = abc.map(_._1).filter(_.contains("edf"))
+    val reg = counts.collect()
+    println("the number of element is: " + reg)
     sc.stop()
   }
 }

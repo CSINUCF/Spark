@@ -24,14 +24,19 @@ trait UnusedData {
        |-- unixReviewTime: long (nullable = true)
     */
     val reviewRDD:RDD[Row] = spark.read.json(reviewData).rdd
-    val aggData = reviewRDD.map(row => (row.getString(0),(row.getDouble(2),row.getString(3)))).groupByKey().map(
-      {
-        case (asin,values) => {
+    val aggData = reviewRDD.map(
+      row =>
+        (row.getString(0),(row.getDouble(2),row.getString(3)))
+    ).groupByKey().map({
+       case (asin,values) => {
           val average = values.map(_._1).sum / values.size
           (asin,average)
         }
-      }
-    )
+     }
+   )
+
+
+
     println("The number of data is: " + aggData.count())
     spark.close()
   }
@@ -66,6 +71,7 @@ trait UnusedDataOptimized {
         }
       }
     )
+//    val aggData = reviewRDD.map(row => (row.getString(0),row.getDouble(2))).groupByKey().mapValues(_.sum)
     println("The number of data is: " + aggData.count())
     spark.close()
   }
